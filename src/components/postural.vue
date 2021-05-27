@@ -24,7 +24,7 @@
                 max-height="400"
                 max-width="250"
                 position="center"
-                src="../assets/img/poses/wandering.gif"
+                :src="imgURL"
             ></v-img>
           </v-col>
           <pos-table :posture="posture"/>
@@ -78,6 +78,11 @@ export default {
           }
         }
       },
+      imgURL: {
+        default: function () {
+          return "../assets/img/poses/wandering.gif"
+        }
+      }
     }
   },
   computed: {
@@ -98,31 +103,31 @@ export default {
         this.posturalProb = newValue
         // console.log(this.posturalProb)
         let data = {
-          nod: {
+          "nod": {
             prob: 0.1,
             cn: "点头"
           },
-          shake_head: {
+          "shake_head": {
             prob: 0.4,
             cn: "摇头"
           },
-          applaud: {
+          "applaud": {
             prob: 0.1,
             cn: "鼓掌"
           },
-          shake_leg: {
+          "shake_leg": {
             prob: 0.1,
             cn: "抖腿"
           },
-          scratch_head: {
+          "scratch_head": {
             prob: 0.1,
             cn: "搔头"
           },
-          arms_folded: {
+          "arms_folded": {
             prob: 0.1,
             cn: "双手抱臂"
           },
-          wandering: {
+          "wandering": {
             prob: 0.1,
             cn: "来回走动"
           },
@@ -135,6 +140,15 @@ export default {
         data.arms_folded.prob = this.posturalProb[5]
         data.wandering.prob = this.posturalProb[6]
         this.posture = data
+        let max = this.posturalProb[0]
+        let maxE = ''
+        for (let e in data) {
+          if (data[e].prob > max) {
+            maxE = e
+            max = data[e].prob
+          }
+        }
+        this.imgURL = require("../assets/img/poses/" + maxE + ".gif")
       }
     }
   }

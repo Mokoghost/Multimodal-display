@@ -159,7 +159,7 @@ export default {
         }
         // console.log(maxE)
         this.imgURL = require("../assets/img/gestures/" + maxE + ".png")
-        console.log(this.imgURL);
+        // console.log(this.imgURL);
       }
     }
   }
