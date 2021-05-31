@@ -46,6 +46,9 @@ export default {
         top: "5%",
         left: "center",
         text: "触觉传感器",
+        textStyle: {
+          fontFamily: "华文中宋"
+        }
       },
       tooltip: {
         position: 'top'
@@ -118,6 +121,9 @@ export default {
             top: "5%",
             left: "center",
             text: "触觉传感器",
+            textStyle: {
+              fontFamily: "华文中宋"
+            }
           },
           tooltip: {
             position: 'top'

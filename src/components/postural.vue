@@ -4,17 +4,17 @@
       <v-card height="450" rounded="lg"
               :class="`elevation-${hover ? 12 : 3}`"
               class="mx-auto pa-6 transition-swing">
-        <v-card-subtitle style="font-weight: bold;font-size: larger">位姿识别</v-card-subtitle>
+        <v-card-subtitle style="font-weight: bold;font-size: larger" class="title-font">位姿识别</v-card-subtitle>
         <v-row dense>
-          <v-col cols="5" class="font-weight-bold">
-            来回走动
+          <v-col cols="5" class="font-weight-bold info-font" >
+            {{ result }}
           </v-col>
-          <v-col cols="4" class="font-weight-bold">置信度:</v-col>
+          <v-col cols="4" class="font-weight-bold info-font">置信度:</v-col>
           <v-col cols="3">
             <v-card
                 v-bind:color="calculateColor"
                 rounded="pill"
-                class="pl-1"
+                class="pl-1 info-font"
                 style="alignment: center;color: #ffffff">
               {{ probability }}
             </v-card>
@@ -41,9 +41,15 @@ export default {
   name: "postural",
   components: {PosTable},
   props: ['posturalProb'],
+  methods: {
+    preciseTo3bit(number) {
+      return Math.round(number * 100) / 100
+    }
+  },
   data() {
     return {
       probability: 0.65,
+      result: '来回走动',
       posture: {
         default: function () {
           return {
@@ -132,22 +138,25 @@ export default {
             cn: "来回走动"
           },
         }
-        data.nod.prob = this.posturalProb[0]
-        data.shake_head.prob = this.posturalProb[1]
-        data.applaud.prob = this.posturalProb[2]
-        data.shake_leg.prob = this.posturalProb[3]
-        data.scratch_head.prob = this.posturalProb[4]
-        data.arms_folded.prob = this.posturalProb[5]
-        data.wandering.prob = this.posturalProb[6]
+        data.nod.prob = this.preciseTo3bit(this.posturalProb[0])
+        data.shake_head.prob = this.preciseTo3bit(this.posturalProb[0])
+        data.applaud.prob = this.preciseTo3bit(this.posturalProb[0])
+        data.shake_leg.prob = this.preciseTo3bit(this.posturalProb[0])
+        data.scratch_head.prob = this.preciseTo3bit(this.posturalProb[0])
+        data.arms_folded.prob = this.preciseTo3bit(this.posturalProb[0])
+        data.wandering.prob = this.preciseTo3bit(this.posturalProb[0])
         this.posture = data
         let max = this.posturalProb[0]
         let maxE = ''
+        let maxR = ''
         for (let e in data) {
           if (data[e].prob > max) {
             maxE = e
             max = data[e].prob
+            maxR = data[e].cn
           }
         }
+        this.result = maxR
         this.imgURL = require("../assets/img/poses/" + maxE + ".gif")
       }
     }
@@ -156,5 +165,10 @@ export default {
 </script>
 
 <style scoped>
-
+.title-font {
+  font-family: 华文中宋, serif;
+}
+.info-font {
+  font-family: 方正姚体简体, serif;
+}
 </style>

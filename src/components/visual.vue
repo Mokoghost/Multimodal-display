@@ -4,14 +4,17 @@
       <v-card height="450" rounded="lg"
               :class="`elevation-${hover ? 12 : 3}`"
               class="mx-auto pa-6 transition-swing">
-        <v-card-subtitle style="font-weight: bold;font-size: larger">面部表情识别</v-card-subtitle>
+        <v-card-subtitle style="font-weight: bold;font-size: larger" class="title-font">面部表情识别</v-card-subtitle>
         <v-row dense>
-          <v-col cols="7" class="font-weight-bold pl-2">
-            识别结果：开心
+          <v-col cols="7" class="font-weight-bold pl-2 info-font">
+            识别结果：{{ result }}
           </v-col>
-          <v-col cols="2" class="font-weight-bold pl-2">置信度:</v-col>
+          <v-col cols="2" class="font-weight-bold pl-2 info-font">置信度:</v-col>
           <v-col cols="2">
-            <v-card v-bind:color="calculateColor" rounded="pill" style="alignment: center;color: #ffffff" class="pl-3">
+            <v-card :color="calculateColor"
+                    rounded="pill"
+                    style="alignment: center;color: #ffffff"
+                    class="pl-3 info-font">
               {{ probability }}
             </v-card>
           </v-col>
@@ -39,6 +42,8 @@ export default {
   data() {
     return {
       probability: 0.32,
+      result: "Happy",
+      type: {},
       emotion: {
         default: function () {
           return [
@@ -93,6 +98,15 @@ export default {
         data[0].Sad = this.visualData[5]
         data[0].Surprise = this.visualData[6]
         this.emotion = data
+        let max = data[0].Neutral
+        let maxV = 'Neutral'
+        for (const dataKey in data[0]) {
+          if (data[0][dataKey] > max) {
+            max = data[0][dataKey]
+            maxV = dataKey.toString()
+          }
+        }
+        this.result = maxV
       }
     }
   }
@@ -100,5 +114,11 @@ export default {
 </script>
 
 <style scoped>
+.title-font {
+  font-family: 华文中宋, serif;
+}
 
+.info-font {
+  font-family: 方正姚体简体, serif;
+}
 </style>

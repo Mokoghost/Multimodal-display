@@ -1,13 +1,9 @@
 <template>
   <v-hover>
     <template v-slot:default="{ hover }">
-      <v-card height="450" rounded="lg" id="line-chart"
+      <v-card height="220" rounded="lg" id="line-chart"
               :class="`elevation-${hover ? 12 : 3}`"
               class="mx-auto pa-6 transition-swing">
-        <v-card-subtitle style="font-weight: bold;font-size: larger">听觉识别</v-card-subtitle>
-        <!--<v-col>-->
-        <!--  <v-card></v-card>-->
-        <!--</v-col>-->
       </v-card>
     </template>
   </v-hover>
@@ -33,6 +29,9 @@ export default {
         top: "5%",
         left: "center",
         text: "听觉传感器",
+        textStyle: {
+          fontFamily: "华文中宋"
+        }
       },
       tooltip: {
         position: 'top'

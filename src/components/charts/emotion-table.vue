@@ -3,25 +3,25 @@
     <template v-slot:default>
       <thead>
       <tr>
-        <th class="text-left" style="padding: 8px">
+        <th class="text-left info-font" style="padding: 8px">
           Neutral
         </th>
-        <th class="text-left" style="padding: 8px">
+        <th class="text-left info-font" style="padding: 8px">
           Anger
         </th>
-        <th class="text-left" style="padding: 8px">
+        <th class="text-left info-font" style="padding: 8px">
           Disgust
         </th>
-        <th class="text-left" style="padding: 8px">
+        <th class="text-left info-font" style="padding: 8px">
           Fear
         </th>
-        <th class="text-left" style="padding: 8px">
+        <th class="text-left info-font" style="padding: 8px">
           Happy
         </th>
-        <th class="text-left" style="padding: 8px">
+        <th class="text-left info-font" style="padding: 8px">
           Sad
         </th>
-        <th class="text-left" style="padding: 8px">
+        <th class="text-left info-font" style="padding: 8px">
           Surprise
         </th>
       </tr>
@@ -78,5 +78,7 @@ export default {
 </script>
 
 <style scoped>
-
+.info-font {
+  font-family: 方正姚体简体, serif;
+}
 </style>

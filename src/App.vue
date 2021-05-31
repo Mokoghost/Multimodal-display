@@ -1,7 +1,7 @@
 <template>
   <v-app id="app">
     <v-app-bar app>
-      <v-toolbar-title>多模态情感分析平台</v-toolbar-title>
+      <v-toolbar-title class="title-font">多模态情感分析平台</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
@@ -32,8 +32,95 @@
           <v-col
               cols="2"
           >
-            <hearing/>
+            <v-row dense>
+              <v-col cols="12">
+                <hearing/>
+              </v-col>
+              <v-col cols="12">
+                <heart-beat/>
+              </v-col>
+            </v-row>
           </v-col>
+        </v-row>
+        <v-spacer class="ma-4"></v-spacer>
+        <v-row class="ml-4">
+          <v-btn
+              class="mx-2 info-font"
+              dark
+              color="blue"
+          >
+            <v-icon dark>
+              mdi-face-recognition
+            </v-icon>
+            面部识别
+          </v-btn>
+        </v-row>
+        <v-spacer class="ma-6"></v-spacer>
+        <v-row class="ml-4">
+          <v-btn
+              class="mx-2 info-font"
+              dark
+              color="orange"
+          >
+            <v-icon dark>
+              mdi-arm-flex
+            </v-icon>
+            肌电识别
+          </v-btn>
+        </v-row>
+        <v-spacer class="ma-6"></v-spacer>
+        <v-row class="ml-4">
+          <v-btn
+              class="mx-2 info-font"
+              dark
+              color="green darken-2"
+          >
+            <v-icon dark>
+              mdi-human-handsup
+            </v-icon>
+            位姿识别
+          </v-btn>
+        </v-row>
+        <v-spacer class="ma-6"></v-spacer>
+        <v-row class="ml-4">
+          <v-btn
+              class="mx-2 info-font"
+              dark
+              color="deep-purple darken-1"
+          >
+            <v-icon dark>
+              mdi-cursor-pointer
+            </v-icon>
+            触觉识别
+          </v-btn>
+        </v-row>
+
+        <v-spacer class="ma-6"></v-spacer>
+        <v-row class="ml-4">
+          <v-btn
+              class="mx-2 info-font"
+              dark
+              color="brown darken-2"
+          >
+            <v-icon dark>
+              mdi-ear-hearing
+            </v-icon>
+            听觉识别
+          </v-btn>
+        </v-row>
+
+        <v-spacer class="ma-6"></v-spacer>
+        <v-row class="ml-4">
+          <v-btn
+              class="mx-2 info-font"
+              dark
+              color="pink"
+          >
+            <v-icon dark>
+              mdi-heart
+            </v-icon>
+            心率识别
+          </v-btn>
         </v-row>
       </v-container>
     </v-main>
@@ -47,10 +134,11 @@ import Haptic from "@/components/haptic"
 import Hearing from "@/components/hearing"
 import Visual from "@/components/visual"
 import {dataRequest} from "@/network/request"
+import HeartBeat from "@/components/heart-beat";
 
 export default {
   name: 'App',
-  components: {Visual, Hearing, Haptic, Electromyography, Postural},
+  components: {HeartBeat, Visual, Hearing, Haptic, Electromyography, Postural},
   data() {
     return {
       timer: '',
@@ -96,4 +184,10 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+.title-font {
+  font-family: 华文中宋, serif;
+}
+.info-font {
+  font-family: 方正姚体简体, serif;
+}
 </style>

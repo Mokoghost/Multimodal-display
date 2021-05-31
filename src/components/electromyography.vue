@@ -4,17 +4,17 @@
       <v-card height="450" rounded="lg"
               :class="`elevation-${hover ? 12 : 3}`"
               class="mx-auto pa-6 transition-swing">
-        <v-card-subtitle style="font-weight: bold;font-size: larger">肌电识别</v-card-subtitle>
+        <v-card-subtitle style="font-weight: bold;font-size: larger" class="title-font">肌电识别</v-card-subtitle>
         <v-row dense>
-          <v-col cols="5" class="font-weight-bold">
-            手势：OK
+          <v-col cols="5" class="font-weight-bold info-font">
+            {{ result }}
           </v-col>
-          <v-col cols="4" class="font-weight-bold">置信度:</v-col>
+          <v-col cols="4" class="font-weight-bold info-font">置信度:</v-col>
           <v-col cols="3">
             <v-card
                 v-bind:color="calculateColor"
                 rounded="pill"
-                class="pl-1"
+                class="pl-1 info-font"
                 style="alignment: center;color: #ffffff">
               {{ probability }}
             </v-card>
@@ -41,6 +41,11 @@ export default {
   name: "electromyography",
   components: {EegTable},
   props: ['emgProb'],
+  methods: {
+    preciseTo3bit(number) {
+      return Math.round(number * 100) / 100
+    }
+  },
   data() {
     return {
       probability: 0.65,
@@ -82,6 +87,7 @@ export default {
           }
         }
       },
+      result: 'OK手势',
       imgURL: {
         default: function () {
           return "../assets/img/gestures/ok_pos.png"
@@ -105,7 +111,6 @@ export default {
       deep: true,
       handler(newValue) {
         this.emgProb = newValue
-        // console.log(this.emgProb);
         let data = {
           "pinch": {
             prob: 0.1,
@@ -140,24 +145,26 @@ export default {
             cn: "OK手势"
           },
         }
-        data.index_out.prob = this.emgProb[0]
-        data.ok_pos.prob = this.emgProb[1]
-        data.thumb_up.prob = this.emgProb[2]
-        data.hand_open.prob = this.emgProb[3]
-        data.wave.prob = this.emgProb[4]
-        data.pinch.prob = this.emgProb[5]
-        data.raise_palm.prob = this.emgProb[6]
-        data.flip_palm.prob = this.emgProb[7]
+        data.index_out.prob = this.preciseTo3bit(this.emgProb[0])
+        data.ok_pos.prob = this.preciseTo3bit(this.emgProb[1])
+        data.thumb_up.prob = this.preciseTo3bit(this.emgProb[2])
+        data.hand_open.prob = this.preciseTo3bit(this.emgProb[3])
+        data.wave.prob = this.preciseTo3bit(this.emgProb[4])
+        data.pinch.prob = this.preciseTo3bit(this.emgProb[5])
+        data.raise_palm.prob = this.preciseTo3bit(this.emgProb[6])
+        data.flip_palm.prob = this.preciseTo3bit(this.emgProb[7])
         this.emg = data
-        let max = this.emgProb[0]
+        let max = data.index_out.prob
         let maxE = ''
+        let maxR = ''
         for (let e in data) {
           if (data[e].prob > max) {
             maxE = e
             max = data[e].prob
+            maxR = data[e].cn
           }
         }
-        // console.log(maxE)
+        this.result = maxR
         this.imgURL = require("../assets/img/gestures/" + maxE + ".png")
         // console.log(this.imgURL);
       }
@@ -167,5 +174,11 @@ export default {
 </script>
 
 <style scoped>
+.title-font {
+  font-family: 华文中宋, serif;
+}
 
+.info-font {
+  font-family: 方正姚体简体, serif;
+}
 </style>

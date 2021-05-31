@@ -10,6 +10,7 @@
             color="primary"
             v-bind="attrs"
             v-on="on"
+            class="info-font"
         >
           点击查看位姿识别概率
         </v-btn>
@@ -19,7 +20,9 @@
             v-for="type in posture"
             @click="() => {}"
         >
-          <v-list-item-title v-text="type.cn + '的概率为：' + type.prob"></v-list-item-title>
+          <v-list-item-title
+              v-text="type.cn + '的概率为：' + type.prob"
+              class="info-font"></v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -79,5 +82,7 @@ export default {
 </script>
 
 <style scoped>
-
+.info-font {
+  font-family: 方正姚体简体, serif;
+}
 </style>
