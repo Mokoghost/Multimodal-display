@@ -4,9 +4,10 @@
       <v-card height="220" rounded="lg"
               :class="`elevation-${hover ? 12 : 3}`"
               class="mx-auto pa-6 transition-swing">
+        <div class="title-font">生理</div>
         <div class="heart"></div>
         <v-spacer></v-spacer>
-        <div class="bottom_footer">心跳：80</div>
+        <div class="bottom_footer">心跳：{{ heartRate[0] }}</div>
       </v-card>
     </template>
   </v-hover>
@@ -14,7 +15,8 @@
 
 <script>
 export default {
-  name: "heart-beat"
+  name: "heart-beat",
+  props: ['heartRate'],
 }
 </script>
 
@@ -84,11 +86,18 @@ body {
     transform: scale(1) rotate(-45deg);
   }
 }
+
 .bottom_footer {
   position: absolute; /*or前面的是absolute就可以用*/
   bottom: 0;
   margin-bottom: 20px;
-  font-family: 华文中宋,serif;
+  font-family: 华文中宋, serif;
   left: 30%;
+}
+
+.title-font {
+  left: 30%;
+  font-weight: bold;
+  font-family: 华文中宋, serif;
 }
 </style>

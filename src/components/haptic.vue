@@ -27,7 +27,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.hapticData);
     this.chart = echarts.init(document.getElementById('haptic-chart'))
 
     // let sentData = [1, 1, 1, 1, 2, 2, 2, 4, 1, 1, 1, 1, 2, 2, 2, 4, 1, 1, 1, 1, 2, 2, 2, 4]
@@ -45,7 +44,7 @@ export default {
       title: {
         top: "5%",
         left: "center",
-        text: "触觉传感器",
+        text: "触觉",
         textStyle: {
           fontFamily: "华文中宋"
         }

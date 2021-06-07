@@ -4,7 +4,7 @@
       <v-card height="450" rounded="lg"
               :class="`elevation-${hover ? 12 : 3}`"
               class="mx-auto pa-6 transition-swing">
-        <v-card-subtitle style="font-weight: bold;font-size: larger" class="title-font">面部表情识别</v-card-subtitle>
+        <v-card-subtitle style="font-weight: bold;font-size: larger" class="title-font">面部表情</v-card-subtitle>
         <v-row dense>
           <v-col cols="7" class="font-weight-bold pl-2 info-font">
             识别结果：{{ result }}
@@ -15,7 +15,7 @@
                     rounded="pill"
                     style="alignment: center;color: #ffffff"
                     class="pl-3 info-font">
-              {{ probability }}
+              {{ confidence }}
             </v-card>
           </v-col>
           <v-col cols="12">
@@ -41,7 +41,6 @@ export default {
   name: "visual",
   data() {
     return {
-      probability: 0.32,
       result: "Happy",
       type: {},
       emotion: {
@@ -61,12 +60,12 @@ export default {
       }
     }
   },
-  props: ['visualData'],
+  props: ['visualData','confidence'],
   computed: {
     calculateColor: function () {
-      if (this.probability < 0.3) {
+      if (this.confidence < 0.3) {
         return "#E53935"
-      } else if (this.probability >= 0.3 && this.probability < 0.6) {
+      } else if (this.confidence >= 0.3 && this.confidence < 0.6) {
         return "#FF9800"
       } else {
         return "#43A047"

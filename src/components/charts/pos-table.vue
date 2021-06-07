@@ -34,7 +34,7 @@ export default {
   name: "pos-table",
   props: {
     posture: {
-      default: function () {
+      default() {
         return {
           nod: {
             prob: 0.1,

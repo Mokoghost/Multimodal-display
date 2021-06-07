@@ -4,7 +4,7 @@
       <v-card height="450" rounded="lg"
               :class="`elevation-${hover ? 12 : 3}`"
               class="mx-auto pa-6 transition-swing">
-        <v-card-subtitle style="font-weight: bold;font-size: larger" class="title-font">肌电识别</v-card-subtitle>
+        <v-card-subtitle style="font-weight: bold;font-size: larger" class="title-font">肌电</v-card-subtitle>
         <v-row dense>
           <v-col cols="5" class="font-weight-bold info-font">
             {{ result }}
@@ -12,11 +12,11 @@
           <v-col cols="4" class="font-weight-bold info-font">置信度:</v-col>
           <v-col cols="3">
             <v-card
-                v-bind:color="calculateColor"
+                :color="calculateColor"
                 rounded="pill"
                 class="pl-1 info-font"
                 style="alignment: center;color: #ffffff">
-              {{ probability }}
+              {{ confidence }}
             </v-card>
           </v-col>
           <v-col>
@@ -40,7 +40,7 @@ import EegTable from "@/components/charts/emg-table";
 export default {
   name: "electromyography",
   components: {EegTable},
-  props: ['emgProb'],
+  props: ['emgProb','confidence'],
   methods: {
     preciseTo3bit(number) {
       return Math.round(number * 100) / 100
@@ -48,7 +48,6 @@ export default {
   },
   data() {
     return {
-      probability: 0.65,
       emg: {
         default: function () {
           return {
@@ -97,9 +96,9 @@ export default {
   },
   computed: {
     calculateColor: function () {
-      if (this.probability < 0.3) {
+      if (this.confidence < 0.3) {
         return "#E53935"
-      } else if (this.probability >= 0.3 && this.probability < 0.6) {
+      } else if (this.confidence >= 0.3 && this.confidence < 0.6) {
         return "#FF9800"
       } else {
         return "#43A047"

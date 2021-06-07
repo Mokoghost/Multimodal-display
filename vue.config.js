@@ -6,7 +6,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/data': {
-                target: 'http://10.41.5.251:8082/aicc/init',
+                target: 'http://10.41.5.251:8082/aicc/ShowItemData',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/data': ''
