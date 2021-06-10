@@ -59,7 +59,7 @@
                 <v-icon dark>
                   mdi-face-recognition
                 </v-icon>
-                面部
+                视觉
               </v-btn>
             </v-row>
             <v-spacer class="ma-6"></v-spacer>
@@ -182,14 +182,14 @@ export default {
       timer: '',
       sentData: [],
       hapticData: [],
-      emgProb: [],
-      posturalProb: [],
+      emgProb: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.3],
+      posturalProb: [0.1, 0.4, 0.1, 0.1, 0.1, 0.1, 0.1],
       visualProb: [],
       emgConfidence: 0,
       visualConfidence: 0,
       postConfidence: 0,
       voice: 0,
-      heartRate: 0,
+      heartRate: [100],
       confidence: [1.0, 1.5384615384615377, 1.0, 1.0, 0.0003509521484375, 0.5],
       finalResult: 0.88,
     }

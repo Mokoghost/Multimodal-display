@@ -16,7 +16,13 @@
 <script>
 export default {
   name: "heart-beat",
-  props: ['heartRate'],
+  props: {
+    heartRate: {
+      default() {
+        return [100]
+      }
+    },
+  }
 }
 </script>
 

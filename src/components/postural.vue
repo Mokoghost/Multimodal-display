@@ -21,8 +21,8 @@
           </v-col>
           <v-col>
             <v-img
-                max-height="400"
-                max-width="250"
+                max-height="300"
+                max-width="200"
                 position="center"
                 :src="imgURL"
             ></v-img>

@@ -21,7 +21,7 @@
           </v-col>
           <v-col>
             <v-img
-                max-height="350"
+                max-height="300"
                 max-width="200"
                 position="center"
                 :src="imgURL"
@@ -40,7 +40,7 @@ import EegTable from "@/components/charts/emg-table";
 export default {
   name: "electromyography",
   components: {EegTable},
-  props: ['emgProb','confidence'],
+  props: ['emgProb', 'confidence'],
   methods: {
     preciseTo3bit(number) {
       return Math.round(number * 100) / 100
@@ -88,7 +88,7 @@ export default {
       },
       result: 'OK手势',
       imgURL: {
-        default: function () {
+        default() {
           return "../assets/img/gestures/ok_pos.png"
         }
       }
